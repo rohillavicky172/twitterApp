@@ -93,7 +93,7 @@ class App extends Component {
         {this.state.search === "" ? (
           <img src={Search} style={{ height: "600px" }} alt="Search" />
         ) : this.state.data !== undefined ? (
-          this.state.data.statuses ? (
+          this.state.data.statuses.length !== 0 ? (
             this.state.data.statuses.map((status, key) => (
               <MediaObject data={status} key={key} />
             ))
