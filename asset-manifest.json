@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/twitterApp/static/css/main.adef6db8.chunk.css",
+    "main.js": "/twitterApp/static/js/main.6f9f7a86.chunk.js",
+    "main.js.map": "/twitterApp/static/js/main.6f9f7a86.chunk.js.map",
+    "runtime-main.js": "/twitterApp/static/js/runtime-main.1c14fd84.js",
+    "runtime-main.js.map": "/twitterApp/static/js/runtime-main.1c14fd84.js.map",
+    "static/css/2.0624914a.chunk.css": "/twitterApp/static/css/2.0624914a.chunk.css",
+    "static/js/2.ad15ef56.chunk.js": "/twitterApp/static/js/2.ad15ef56.chunk.js",
+    "static/js/2.ad15ef56.chunk.js.map": "/twitterApp/static/js/2.ad15ef56.chunk.js.map",
+    "index.html": "/twitterApp/index.html",
+    "precache-manifest.990ea1c151243d68bec4449d5001ac21.js": "/twitterApp/precache-manifest.990ea1c151243d68bec4449d5001ac21.js",
+    "service-worker.js": "/twitterApp/service-worker.js",
+    "static/css/2.0624914a.chunk.css.map": "/twitterApp/static/css/2.0624914a.chunk.css.map",
+    "static/css/main.adef6db8.chunk.css.map": "/twitterApp/static/css/main.adef6db8.chunk.css.map",
+    "static/media/Search.png": "/twitterApp/static/media/Search.51e57402.png",
+    "static/media/no-result-image.jpg": "/twitterApp/static/media/no-result-image.89b775fb.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.1c14fd84.js",
+    "static/css/2.0624914a.chunk.css",
+    "static/js/2.ad15ef56.chunk.js",
+    "static/css/main.adef6db8.chunk.css",
+    "static/js/main.6f9f7a86.chunk.js"
+  ]
+}
