@@ -1,23 +1,20 @@
 import React, { Component } from "react";
 import { Media, Card } from "react-bootstrap";
 import NoResultImage from "../img/no-result-image.jpg";
-import Avatar from "../img/avatar.png";
 
 class MediaObject extends Component {
-  state = {};
   render() {
     const { data, noResult } = this.props;
-    console.log(noResult);
     return (
       <>
         {noResult ? (
           <Card body>
-              <img
-              style={{ borderRadius: "5px", width:"100%" }}
+            <img
+              style={{ borderRadius: "5px", width: "100%" }}
               className="mr-3"
               src={NoResultImage}
-              alt={Avatar}
-        />
+              alt="Not Found"
+            />
           </Card>
         ) : (
           <Card body style={{ borderRadius: "5px" }} className="m-2 p-2">
@@ -28,7 +25,7 @@ class MediaObject extends Component {
                 style={{ borderRadius: "5px" }}
                 className="mr-3"
                 src={data.user.profile_image_url}
-                alt={Avatar}
+                alt="Not Found"
               />
               <Media.Body>
                 <div>

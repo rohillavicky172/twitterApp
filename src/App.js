@@ -12,22 +12,18 @@ class App extends Component {
     this.state = {
       search: "",
       seconds: 0,
-      data: undefined
+      data: undefined,
+      serachClicked: false
     };
   }
 
-  tick() {
-    setInterval(
-      () =>
-        this.setState({
-          seconds: this.state.seconds + 1
-        }),
-      1000
-    );
-  }
-
   intervalFunc = () => {
-    this.tick();
+    this.counter = setInterval(() => {
+      this.setState({
+        seconds: this.state.seconds + 1
+      });
+    }, 1000);
+
     this.interval = setInterval(() => {
       this.getData();
     }, 30000);
@@ -41,6 +37,13 @@ class App extends Component {
     this.setState({
       [e.target.name]: e.target.value
     });
+    clearInterval(this.counter);
+    clearInterval(this.interval);
+    this.setState({
+      seconds: 0,
+      data: undefined,
+      serachClicked: false
+    });
   };
 
   getDataFromAPI = async key => {
@@ -48,6 +51,7 @@ class App extends Component {
       .get(`https://aravindtwitter.herokuapp.com/twittersearch?key=` + key)
       .then(result => {
         setTimeout(this.setState({ data: result.data }), 2000);
+        this.intervalFunc();
       })
       .catch(function(error) {
         console.log(error);
@@ -55,44 +59,65 @@ class App extends Component {
   };
 
   getData = () => {
+    clearInterval(this.counter);
+    clearInterval(this.interval);
     this.setState({
       seconds: 0,
-      data:undefined
+      data: undefined
     });
     const key = getUrlParam("key", undefined);
     this.getDataFromAPI(key);
   };
 
   handleSearch = e => {
+    this.setState({ serachClicked: true });
     window.history.pushState(null, "Search", "?key=" + this.state.search);
     this.getData();
-    this.intervalFunc();
   };
 
   render() {
     return (
       <div className={"container"}>
-        <div
-          style={{
-            borderBottom: "2px solid #1DA1F2",
-            marginBottom: "5px",
-            padding: "5px"
-          }}
-        >
-          <span style={{ color: "#1DA1F2" }}>Search @ Twitter </span>
-          <span style={{ float: "right", color: "#1DA1F2" }}>
-            Auto refresh in {this.state.seconds} seconds
-          </span>
+        <div className={"row"}>
+          <div className={"col-12"}>
+            <div
+              style={{
+                borderBottom: "2px solid #1DA1F2",
+                marginBottom: "5px",
+                padding: "5px",
+                width: "100%"
+              }}
+            >
+              <span style={{ color: "#1DA1F2" }}>Search @ Twitter </span>
+              <span style={{ float: "right", color: "#1DA1F2" }}>
+                Auto refresh in {this.state.seconds} seconds
+              </span>
+            </div>
+          </div>
         </div>
 
-        <SearchComponent
-          handleChange={this.handleChange}
-          handleSearch={this.handleSearch}
-        />
+        <div className={"row"}>
+          <div className={"col-12"}>
+            <SearchComponent
+              handleChange={this.handleChange}
+              handleSearch={this.handleSearch}
+            />
+          </div>
+        </div>
 
-        {this.state.search === "" ? (
-          <img src={Search} style={{ height: "600px" }} alt="Search" />
-        ) : this.state.data !== undefined ? (
+        {this.state.serachClicked === true && this.state.search !== "" ? (
+          this.state.data === undefined ? (
+            <Loader />
+          ) : (
+            ""
+          )
+        ) : (
+          <div>
+            <img src={Search} style={{ maxHeight: "750px" }} alt="Search" />
+          </div>
+        )}
+
+        {this.state.data !== undefined ? (
           this.state.data.statuses.length !== 0 ? (
             this.state.data.statuses.map((status, key) => (
               <MediaObject data={status} key={key} />
@@ -101,8 +126,8 @@ class App extends Component {
             <MediaObject noResult />
           )
         ) : (
-          <Loader />
-        )}   
+          ""
+        )}
       </div>
     );
   }
